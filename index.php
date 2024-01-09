@@ -48,7 +48,7 @@ function getAvailableRoomTypes($pdo, $start_date, $end_date) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking - Step 1</title>
-    <link rel="stylesheet" href="mystyle.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <ul>
@@ -57,14 +57,11 @@ function getAvailableRoomTypes($pdo, $start_date, $end_date) {
         <li>Gallery</li>
         <li>Contact us</li>
     </ul>
-    <h1>Booking - Step 1</h1>
     <form action="index.php" method="post">
         <label for="start_date">Start Date:</label>
         <input type="date" id="start_date" name="start_date" required>
-        <br>
         <label for="end_date">End Date:</label>
         <input type="date" id="end_date" name="end_date" required>
-        <br>
         <input type="submit" value="Next">
     </form>
 </body>
