@@ -9,13 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $available_room_types = getAvailableRoomTypes($pdo, $start_date, $end_date);
 
- 
+
     if (!empty($available_room_types)) {
-       
+
         header("Location: room_selection.php?start_date=$start_date&end_date=$end_date");
         exit();
     } else {
-    
+
         echo "<p>Sorry, the selected dates are not available. Please choose different dates or room types.</p>";
     }
 }
@@ -29,11 +29,11 @@ function getAvailableRoomTypes($pdo, $start_date, $end_date) {
         $stmt->execute([$room_type, $start_date, $end_date]);
         $count = $stmt->fetchColumn();
 
-    
+
         $total_rooms = 1;
 
         if ($count < $total_rooms) {
-  
+
             $available_room_types[] = $room_type;
         }
     }
@@ -48,8 +48,15 @@ function getAvailableRoomTypes($pdo, $start_date, $end_date) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking - Step 1</title>
+    <link rel="stylesheet" href="mystyle.css">
 </head>
 <body>
+    <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Gallery</li>
+        <li>Contact us</li>
+    </ul>
     <h1>Booking - Step 1</h1>
     <form action="index.php" method="post">
         <label for="start_date">Start Date:</label>
