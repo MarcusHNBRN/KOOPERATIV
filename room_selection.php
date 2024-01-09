@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     if (isRoomAvailable($pdo, $start_date, $end_date, $room_type)) {
-    
+
 
 
         $stmt = $pdo->prepare("INSERT INTO bookings (start_date, end_date, room_type, guest_name) VALUES (?, ?, ?, ?)");
         $stmt->execute([$start_date, $end_date, $room_type, $guest_name]);
 
-  
+
         echo "<h1>Booking Confirmed</h1>";
         echo "<p>Thank you for your booking, $guest_name!</p>";
         echo "<p>Details:</p>";
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<li>Guest Name: $guest_name</li>";
         echo "</ul>";
     } else {
-    
+
         echo "<p>Sorry, the selected room type is not available for the specified dates.</p>";
     }
 
