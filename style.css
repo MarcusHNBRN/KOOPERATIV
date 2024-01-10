@@ -54,7 +54,29 @@ input {
   height: 500px;
 }
 
-img {
+.room-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.room {
+  display: flex;
+  grid-row: row;
+  width: 1200px;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
   width: 100%;
-  height: 100%;
+}
+
+.room-text {
+  width: 430px;
+  height: 368px;
+  padding-left: 100px;
+}
+
+.roomimg {
+  border-radius: 20px;
 }

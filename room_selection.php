@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <h1>Booking - Step 2</h1>
+    
     <form action="room_selection.php?start_date=<?php echo $start_date; ?>&end_date=<?php echo $end_date; ?>" method="post">
         <label for="room_type">Select Room Type:</label>
         <select id="room_type" name="room_type" required>
