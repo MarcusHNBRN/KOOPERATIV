@@ -125,8 +125,6 @@ input {
 }
 
 #name-input {
-  display: flex;
-  flex-direction: column;
   text-align: center;
   margin: 20px auto;
   background-color: var(--orange);
