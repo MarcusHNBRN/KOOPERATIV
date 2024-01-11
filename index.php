@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 include 'db.php';
 
@@ -51,15 +52,10 @@ function getAvailableRoomTypes($pdo, $start_date, $end_date) {
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <ul>
-      <li>Home</li>
-      <li>About</li>
-      <li>Gallery</li>
-      <li>Contact us</li>
-    </ul>
-    <div class="logo">
-      <img src="./image 4.png" />
-    </div>
+  <div class="logo-container">
+  <img class="logoimg" src="./images/frame.png"/>
+  <img class="bgimg" src="./images/hotel.png" />
+</div>
     <div class="booking">
       <form action="index.php" method="post">
         <label for="start_date"></label>

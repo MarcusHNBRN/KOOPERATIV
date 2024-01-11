@@ -1,5 +1,7 @@
 <?php
+declare(strict_types=1);
 include 'db.php';
+include 'config.php';
 
 $start_date = $_GET['start_date'] ?? '';
 $end_date = $_GET['end_date'] ?? '';
@@ -9,17 +11,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $end_date = $_GET['end_date'];
     $room_type = $_POST['room_type'];
     $guest_name = $_POST['guest_name'];
+    $transfer_code = $_POST['transfer_code'];
 
     $availability = isRoomAvailable($pdo, $start_date, $end_date, $room_type);
 
     if ($availability['available']) {
         $total_cost = calculateTotalCost($start_date, $end_date, $room_type);
 
-        $stmt = $pdo->prepare("INSERT INTO bookings (start_date, end_date, room_type, guest_name) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$start_date, $end_date, $room_type, $guest_name]);
+        if (validateTransferCode($transfer_code, $total_cost)) {
+            $stmt = $pdo->prepare("INSERT INTO bookings (start_date, end_date, room_type, guest_name) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$start_date, $end_date, $room_type, $guest_name]);
 
-        header("Location: confirmation.php?start_date=$start_date&end_date=$end_date&room_type=$room_type&guest_name=$guest_name");
-        exit();
+            header("Location: confirmation.php?start_date=$start_date&end_date=$end_date&room_type=$room_type&guest_name=$guest_name");
+            exit();
+        } else {
+            $errorMessage = "Invalid transfer code. Please enter a valid transfer code.";
+        }
     } else {
         $errorMessage = "Sorry, the selected dates for the $room_type room are not available. Please choose different dates or room types.";
     }
@@ -54,6 +61,32 @@ function calculateTotalCost($start_date, $end_date, $room_type) {
 
     return $total_cost;
 }
+
+function validateTransferCode($transfer_code, $total_cost) {
+
+    $centralBankURL = 'https://www.yrgopelag.se/centralbank/transferCode';
+    $apiKey = $myAPIKey;
+
+    $requestData = [
+        'transferCode' => $transfer_code,
+        'totalcost' => $total_cost,
+    ];
+
+    $options = [
+        'http' => [
+            'header' => "Content-type: application/json\r\n",
+            'method' => 'POST',
+            'content' => json_encode($requestData),
+        ],
+    ];
+
+    $context = stream_context_create($options);
+    $response = file_get_contents($centralBankURL, false, $context);
+
+    $responseData = json_decode($response, true);
+
+    return isset($responseData['valid']) && $responseData['valid'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,24 +98,23 @@ function calculateTotalCost($start_date, $end_date, $room_type) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Gallery</li>
-        <li>Contact us</li>
+    <ul class="nav">
+        <li><img class="logoimg" src="./images/frame.png"/></li>
+
     </ul>
     <div class="head">
         <h1>SELECT YOUR PREFERRED ROOM</h1>
     </div>
     <div class="room-selection">
         <form action="room_selection.php?start_date=<?php echo $start_date; ?>&end_date=<?php echo $end_date; ?>" method="post">
-            <label>Select a Room:</label>
+            <div class="room-dropbox">
             <select name="room_type" onchange="showRoomInfo(this)">
+            <option value="" disabled selected>Select Room</option>
                 <option value="basic">Basic</option>
                 <option value="premium">Premium</option>
                 <option value="luxury">Luxury</option>
             </select>
-
+            </div>
             <div id="room-info-basic" class="room-info" style="display: none;">
                 <h2>Basic Room</h2>
                 <img class="roomimg" src="./images/image 3.png" />
@@ -120,9 +152,12 @@ function calculateTotalCost($start_date, $end_date, $room_type) {
 
 
             <div id="name-input" style="display: none;">
-                <label for="guest_name">Your Name:</label>
-                <input type="text" id="guest_name" name="guest_name" required>
+                <label for="guest_name"></label>
+                <input type="text" id="guest_name" name="guest_name" required placeholder="Name">
                 <button class="book" type="submit">Book</button>
+                <label for="transfer_code"></label>
+                <input type="text" id="transfer_code" name="transfer_code" required placeholder="Enter your transfer code">
+
             </div>
         </form>
     </div>

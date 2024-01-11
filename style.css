@@ -22,9 +22,9 @@
 body {
   background: var(--beige);
 }
-ul {
-  padding: 25px;
-  margin: 25px;
+.nav {
+  padding-top: 25px;
+  padding-bottom: 25px;
   background-color: var(--darkblue);
   display: flex;
   width: 100%;
@@ -36,9 +36,14 @@ li {
   text-transform: uppercase;
   cursor: pointer;
   color: var(--beige);
-  min-width: 80px;
+  max-width: 100%;
   margin: auto;
   font-family: josefinSansBold;
+}
+
+.logoimg {
+  max-width: 200px;
+  max-height: 38px;
 }
 
 .booking {
@@ -51,7 +56,7 @@ li {
 }
 
 input {
-  background-color: var(--peach);
+  background-color: var(--beige);
   border: none;
   width: 150px;
   height: 35px;
@@ -60,9 +65,32 @@ input {
   text-align: center;
 }
 
-.logo {
+.logo-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  position: relative;
+  height: 100vh; /* Set a height for centering vertically on the viewport */
+}
+
+.logoimg {
+  position: relative;
+  z-index: 1;
+}
+
+.bgimg {
+  position: absolute;
   width: 100%;
-  height: 500px;
+  height: 100%;
+}
+
+.room-selection {
+  text-align: center;
+}
+
+.room-dropbox {
+  position: relative;
+  font-family: josefinSansBold;
 }
 
 .room-info {
@@ -72,7 +100,7 @@ input {
   margin: 20px auto;
   max-width: 500px;
   text-align: center;
-  background-color: var(--peach);
+  background-color: var(--orange);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -99,6 +127,11 @@ input {
 #name-input {
   text-align: center;
   margin: 20px auto;
+  background-color: var(--orange);
+  width: 500px;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #guest_name {
@@ -129,4 +162,40 @@ input {
   font-family: josefinSansMedium;
   color: var(--darkblue);
   letter-spacing: 15px;
+}
+
+label {
+  color: var(--darkblue);
+  font-family: josefinSansBold;
+}
+
+select {
+  background-color: var(--orange);
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20448%22%20enable-background%3D%22new%200%200%20256%20448%22%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E.arrow%7Bfill%3A@{arrow}%3B%7D%3C%2Fstyle%3E%3Cpath%20class%3D%22arrow%22%20d%3D%22M255.9%20168c0-4.2-1.6-7.9-4.8-11.2-3.2-3.2-6.9-4.8-11.2-4.8H16c-4.2%200-7.9%201.6-11.2%204.8S0%20163.8%200%20168c0%204.4%201.6%208.2%204.8%2011.4l112%20112c3.1%203.1%206.8%204.6%2011.2%204.6%204.4%200%208.2-1.5%2011.4-4.6l112-112c3-3.2%204.5-7%204.5-11.4z%22%2F%3E%3C%2Fsvg%3E%0A');
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: auto 50%;
+  border-radius: 2px;
+  border: none;
+  color: #ffffff;
+  padding: 10px 30px 10px 10px;
+  outline: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+@-moz-document url-prefix() {
+  select {
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0 0 0 #ffffff;
+  }
+}
+
+p {
+  font-family: josefinSansmedium;
+  color: var(--orange);
 }
