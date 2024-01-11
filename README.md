@@ -1,4 +1,3 @@
-WHY NOT A GIF HERE? TO SET THE MOOD.
 
 # Sannikov Land
 
