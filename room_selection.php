@@ -159,10 +159,9 @@ function validateTransferCode($transfer_code, $total_cost) {
             <div id="name-input" style="display: none;">
                 <label for="guest_name"></label>
                 <input type="text" id="guest_name" name="guest_name" required placeholder="Name">
-                <button class="book" type="submit">Book</button>
                 <label for="transfer_code"></label>
                 <input type="text" id="transfer_code" name="transfer_code" required placeholder="Enter your transfer code">
-
+                <button class="book" type="submit">Book</button>
             </div>
         </form>
     </div>
