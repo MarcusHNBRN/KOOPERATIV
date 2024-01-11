@@ -5,7 +5,7 @@ Sannikov Land was a phantom island in the Arctic Ocean. Its existence was conjec
 
 # Kooperativ
 
-Hotel Kooperativ A is a unique establishment that draws its design inspiration from East German aesthetics, reflecting the architectural and cultural heritage of the region. 
+Hotel Kooperativ is a unique establishment that draws its design inspiration from East German aesthetics, reflecting the architectural and cultural heritage of the region. 
 
 # Code review
 
