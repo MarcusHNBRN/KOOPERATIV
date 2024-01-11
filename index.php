@@ -48,19 +48,18 @@ function getAvailableRoomTypes($pdo, $start_date, $end_date) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Booking - Step 1</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
   <div class="logo-container">
-  <img class="logoimg" src="./images/frame.png"/>
+  <img class="logoimage" src="./images/frame.png"/>
   <img class="bgimg" src="./images/hotel.png" />
 </div>
     <div class="booking">
-      <form action="index.php" method="post">
-        <label for="start_date"></label>
+        <form action="index.php" method="post">
+        <label for="start_date">Arrival:</label>
         <input type="date" id="start_date" name="start_date" required />
-        <label for="end_date"></label>
+        <label for="end_date">Depature:</label>
         <input type="date" id="end_date" name="end_date" required />
         <input type="submit" value="Next" />
       </form>
