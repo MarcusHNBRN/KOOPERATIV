@@ -106,6 +106,11 @@ function validateTransferCode($transfer_code, $total_cost) {
         <h1>SELECT YOUR PREFERRED ROOM</h1>
     </div>
     <div class="room-selection">
+    <?php if (isset($errorMessage)): ?>
+    <div class="error-message">
+        <?php echo htmlspecialchars($errorMessage); ?>
+    </div>
+<?php endif; ?>
         <form action="room_selection.php?start_date=<?php echo $start_date; ?>&end_date=<?php echo $end_date; ?>" method="post">
             <div class="room-dropbox">
             <select name="room_type" onchange="showRoomInfo(this)">

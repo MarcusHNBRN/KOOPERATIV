@@ -204,3 +204,9 @@ p {
   color: #01204e;
   font-family: josefinSansBold;
 }
+
+.error-message {
+  font-family: josefinSansBold;
+  color: var(--darkblue);
+  padding: 25px;
+}
