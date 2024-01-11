@@ -22,7 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("INSERT INTO bookings (start_date, end_date, room_type, guest_name) VALUES (?, ?, ?, ?)");
             $stmt->execute([$start_date, $end_date, $room_type, $guest_name]);
 
-            header("Location: confirmation.php?start_date=$start_date&end_date=$end_date&room_type=$room_type&guest_name=$guest_name");
+            $response = [
+                "island" => $islandName,
+                "hotel" => $hotelName,
+                "arrival_date" => $start_date,
+                "departure_date" => $end_date,
+                "total_cost" => $total_cost,
+                "stars" => $stars,
+                "additional_info" => [
+                    "greeting" => "Thank you for choosing $hotelName",
+                ]
+            ];
+
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
             exit();
         } else {
             $errorMessage = "Invalid transfer code. Please enter a valid transfer code.";
@@ -31,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorMessage = "Sorry, the selected dates for the $room_type room are not available. Please choose different dates or room types.";
     }
 }
+
 
 function isRoomAvailable($pdo, $start_date, $end_date, $room_type) {
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM bookings WHERE room_type = ? AND NOT ((end_date < ?) OR (start_date > ?))");
@@ -64,7 +79,7 @@ function calculateTotalCost($start_date, $end_date, $room_type) {
 
 function validateTransferCode($transfer_code, $total_cost) {
 
-    $centralBankURL = 'https://www.yrgopelag.se/centralbank/transferCode';
+    $centralBankURL = 'https://www.yrgopelag.se/centralbank';
     $apiKey = $myAPIKey;
 
     $requestData = [
@@ -87,6 +102,7 @@ function validateTransferCode($transfer_code, $total_cost) {
 
     return isset($responseData['valid']) && $responseData['valid'];
 }
+
 ?>
 
 <!DOCTYPE html>
