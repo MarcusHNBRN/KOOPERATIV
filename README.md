@@ -9,13 +9,13 @@ Hotel Kooperativ is a unique establishment that draws its design inspiration fro
 
 # Code review
 
-1. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-2. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-3. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-4. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-5. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-6. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-7. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-8. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-9. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-10. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
+1. index.php:4 - You may consider using the `__DIR__` magic constant to ensure that the path is correctly calculated. Not essential in this specific project, but will help if you ever want to scale up.
+2. index.php:6-45 - Logic for checking available rooms could be moved separate php file, to avoid cluttering index.php.
+3. room_selection.php:4-5 - Your app will crash if the included files are not found, so might as well use `require` or keep using `ìnclude`, but add some kind of user message saying the files couldn't be found.
+4. room_selection.php:10-48 - Your entire booking logic resides in the file `room_selection.php`. The infrastructure of you app might be easier to follow for an outsider if booking and verification was moved to `booking.php`, for example.
+5. room_selection.php:83 - Can't find reference to `$myAPIKey` anywhere else in the project.
+6. room_selection.js:137 - Inline event handlers are generally considered bad prectice. Instead, it's better to handle events centrally via the dedicated `addEventListener`.
+7. room_selection.php:144 - Inline styles make your code harder to maintain and update.
+8. room_selection.php:190-207 - For clarity and reusability, this script could be moved to a separate js file.
+9. style.css:109 - The color white is referenced as `white`, `#fff`, and `#ffffff`. For consistency, may as well define it among your color variables and use that exclusively.
+10. images/image 3.png - Using blank spaces in file names is considered bad practice. Replace with underscore or hyphen.
