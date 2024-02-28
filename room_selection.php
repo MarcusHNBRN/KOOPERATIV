@@ -80,7 +80,7 @@ function calculateTotalCost($start_date, $end_date, $room_type) {
 function validateTransferCode($transfer_code, $total_cost) {
 
     $centralBankURL = 'https://www.yrgopelag.se/centralbank';
-    $apiKey = $myAPIKey;
+    $apiKey = $apiKey;
 
     $requestData = [
         'transferCode' => $transfer_code,
